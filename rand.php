@@ -87,6 +87,41 @@
         border: 1px solid #03DAC6;
     }
 
+    .user-query{
+        position: absolute;
+        left: 25em;
+        top: 22em;
+        color: white;
+        font-size: 1.5em;
+    }
+
+    span input{
+        font-size: 1em;
+        border: 0;
+    }
+
+    .btn {
+        text-decoration: none;
+        width: 100%;
+        color: black;
+        margin: 2% auto;
+        padding: 1%;
+        border-radius: 50px;
+        text-align: center;
+        font-size: 1.5em;
+        font-weight: 700;
+        cursor: pointer;
+        background: linear-gradient(to right, #03DAC6 50%, white 50%);
+        background-size: 200% 100%;
+        background-position: right bottom;
+        transition: all .3s ease-out;
+        }
+
+    .btn:hover {
+        background-position: left bottom;
+        color: white;
+    }
+
     </style>
 
 </head>
@@ -124,5 +159,35 @@
         }
         echo "<table>";
     ?>
+
+    <form action="rand.php" method="POST">
+        <div class="user-query">
+            <p>SELECT <span><input type="text" name="column1" placeholder="productID" /></span> FROM products
+            ORDER BY RAND();</p>
+            <button class="btn" value="submit">SUBMIT</button>
+        </div>
+    </form>
+    
+        <?php
+        $column = $_POST['column1'];
+            
+        $sql = "SELECT $column FROM PRODUCTS ORDER BY RAND();";
+
+        $result = mysqli_query($conn, $sql);
+
+        echo '<table class="result">';
+        echo "<tr>";
+        echo "<th>RAND() RESULT</th>";
+        echo "</tr>";
+        
+        while ($row = @mysqli_fetch_assoc($result)) {
+            echo "<tr>";
+            echo "<td>" . $row[$column] . "</td>";
+            echo "</tr>";
+        }
+        echo "<table>";
+    ?>
+
+
 </body>
 </html>
