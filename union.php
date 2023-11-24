@@ -87,6 +87,53 @@
         border: 1px solid #03DAC6;
     }
 
+    .user-query{
+        position: absolute;
+        left: 45em;
+        top: 5em;
+        color: white;
+        font-size: 1.5em;
+    }
+
+    span input{
+        font-size: 1em;
+        border: 0;
+    }
+
+    .btn {
+        text-decoration: none;
+        width: 100%;
+        color: black;
+        margin: 2% auto;
+        padding: 1%;
+        border-radius: 50px;
+        text-align: center;
+        font-size: 1.5em;
+        font-weight: 700;
+        cursor: pointer;
+        background: linear-gradient(to right, #03DAC6 50%, white 50%);
+        background-size: 200% 100%;
+        background-position: right bottom;
+        transition: all .3s ease-out;
+        }
+
+        .btn:hover {
+            background-position: left bottom;
+            color: white;
+        }
+
+        #page-title{
+            color: #03DAC6; 
+            font-size: 1.5em;
+            font-weight: 800;
+        }
+
+        .result{
+            position: absolute;
+            left: 60em;
+            top: 20em;
+        }
+
     </style>
 
 </head>
@@ -99,6 +146,17 @@
             <li><a class="hover-underline-animation" href="numeric.php">NUMERIC</a></li>
         </ul>
     </div>
+
+    <form action="union.php" method="POST">
+        <div class="user-query">
+            <p>SELECT <span><input type="text" name="column1" placeholder="City" /></span> FROM customers
+            <br />
+            <span id="page-title">UNION</span>
+            <br />
+            SELECT <span><input type="text" name="column2" placeholder="Product Name" /></span> FROM products;</p>
+            <button class="btn" value="submit">SUBMIT</button>
+        </div>
+    </form>
 
     <?php
         $query = 'SELECT * FROM CUSTOMERS;';
@@ -150,6 +208,31 @@
         }
         echo "<table>";
     ?>
+
+        <?php
+            $column1 = $_POST['column1'];
+            $column2 = $_POST['column2'];
+            
+            $sql = "SELECT $column1 FROM customers
+            UNION
+            SELECT $column2 FROM products";
+
+            $result = mysqli_query($conn, $sql);
+
+            echo '<table class="result">';
+            echo "<tr>";
+                echo "<th>UNION RESULT</th>";
+            echo "</tr>";
+        
+            while ($row = @mysqli_fetch_assoc($result)) {
+                echo "<tr>";
+                echo "<td>" . $row[$column1] . "</td>";
+                echo "</tr>";
+            }
+            echo "<table>";
+        ?>
+
+
 
 
 </body>
