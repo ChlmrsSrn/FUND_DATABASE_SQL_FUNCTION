@@ -124,7 +124,6 @@
         }
         echo "<table>"; 
 
-        <?php
         $column1 = $_POST['column1'];
         $column2 = $_POST['column2'];
         $column3 = $_POST['column3'];
@@ -162,8 +161,9 @@
         } else {
             
             $sql = "SELECT $column1 
-                    FROM customer 
+                    FROM customers
                     WHERE $column2 IN ('$column3') AND $column2 IS NOT NULL;";
+
             $result = mysqli_query($conn, $sql);
             
             echo '<table class="result">';

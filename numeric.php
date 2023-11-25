@@ -100,6 +100,65 @@
         </ul>
     </div>
 
+    <div class="function-container">
+        <div class="function">
+            <form action="numeric.php" method="POST">
+                <p>SQRT() FUNCTION</p>
+                <p>SELECT SQRT(<span><input type="number" name="num1" /></span>);</p>
+                <button class="btn" value="submit">SUBMIT</button>
+            </form>
+        </div>
+
+        <div class="function">
+            <form action="numeric.php" method="POST">
+                <p>SELECT CEIL(<span><input type="number" step="0.01" name="num2"/></span>)</p>
+                <button class="btn" value="submit">SUBMIT</button>
+            </form>
+        </div>
+    </div>
+
+    <?php
+        $num1 = $_POST['num1'];
+        $num2 = $_POST['num2'];
+            
+        $sqlSqrt = "SELECT SQRT($num1) AS sqrt_result;";
+
+        $resultS = mysqli_query($conn, $sqlSqrt);
+
+        echo '<table class="result">';
+        echo "<tr>";
+        echo "<th>SQRT($num1) RESULT</th>";
+        echo "</tr>";
+        
+        while ($row = @mysqli_fetch_assoc($resultS)) {
+            echo "<tr>";
+            echo "<td>" . $row['sqrt_result'] . "</td>";
+            echo "</tr>";
+        }
+        echo "<table>";
+
+
+
+        $sqlCeil = "SELECT CEIL($num2) AS ceil_result;";
+
+        $resultC = mysqli_query($conn, $sqlCeil);
+
+        echo '<table class="result">';
+        echo "<tr>";
+        echo "<th>CEIL($num2) RESULT</th>";
+        echo "</tr>";
+
+        while ($row = @mysqli_fetch_assoc($resultC)) {
+            echo "<tr>";
+            echo "<td>" . $row['ceil_result'] . "</td>";
+            echo "</tr>";
+        }
+        echo "<table>";
+
+
+    ?>
+
+
 
 </body>
 </html>
