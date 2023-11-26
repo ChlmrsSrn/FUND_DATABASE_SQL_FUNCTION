@@ -114,24 +114,24 @@
         background-size: 200% 100%;
         background-position: right bottom;
         transition: all .3s ease-out;
-        }
+    }
 
-        .btn:hover {
-            background-position: left bottom;
-            color: white;
-        }
+    .btn:hover {
+        background-position: left bottom;
+        color: white;
+    }
 
-        #page-title{
-            color: #03DAC6; 
-            font-size: 1.5em;
-            font-weight: 800;
-        }
+    #page-title{
+        color: #03DAC6; 
+        font-size: 1.5em;
+        font-weight: 800;
+    }
 
-        .result{
-            position: absolute;
-            left: 52%;
-            top: 20em;
-        }
+    .result{
+        position: absolute;
+        left: 52%;
+        top: 20em;
+    }
 
     </style>
 

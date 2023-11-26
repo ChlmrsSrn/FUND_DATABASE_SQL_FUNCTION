@@ -87,6 +87,41 @@
         border: 1px solid #03DAC6;
     }
 
+    .user-query{
+        position: relative;
+        color: white;
+        left: 35%;
+        margin-top: 5%;
+        font-size: 1.5em;
+    }
+
+    .btn {
+        text-decoration: none;
+        width: 35%;
+        color: black;
+        margin: 2% auto;
+        border-radius: 20px;
+        text-align: center;
+        font-size: 1em;
+        font-weight: 700;
+        cursor: pointer;
+        background: linear-gradient(to right, #03DAC6 50%, white 50%);
+        background-size: 200% 100%;
+        background-position: right bottom;
+        transition: all .3s ease-out;
+    }
+
+    .btn:hover {
+        background-position: left bottom;
+        color: white;
+    }
+
+    .page-title{
+        color: #03DAC6; 
+        font-size: 1.5em;
+        font-weight: 800;
+        position: relative;
+    }
     </style>
 
 </head>
@@ -100,22 +135,13 @@
         </ul>
     </div>
 
-    <div class="function-container">
-        <div class="function">
+        <div class="user-query">
             <form action="numeric.php" method="POST">
-                <p>SQRT() FUNCTION</p>
+                <p class="page-title">SQRT() FUNCTION</p>
                 <p>SELECT SQRT(<span><input type="number" name="num1" /></span>);</p>
                 <button class="btn" value="submit">SUBMIT</button>
             </form>
         </div>
-
-        <div class="function">
-            <form action="numeric.php" method="POST">
-                <p>SELECT CEIL(<span><input type="number" step="0.01" name="num2"/></span>)</p>
-                <button class="btn" value="submit">SUBMIT</button>
-            </form>
-        </div>
-    </div>
 
     <?php
         $num1 = $_POST['num1'];
@@ -136,9 +162,19 @@
             echo "</tr>";
         }
         echo "<table>";
+    ?>
+
+    <div style="margin-bottom: -5%;" class="user-query">
+        <form action="numeric.php" method="POST">
+            <p class="page-title">CEIL() FUNCTION</p>
+            <p>SELECT CEIL(<span><input type="number" step="0.01" name="num2"/></span>)</p>
+            <button class="btn" value="submit">SUBMIT</button>
+        </form>
+    </div>
 
 
 
+    <?php
         $sqlCeil = "SELECT CEIL($num2) AS ceil_result;";
 
         $resultC = mysqli_query($conn, $sqlCeil);
