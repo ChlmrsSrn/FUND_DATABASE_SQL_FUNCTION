@@ -88,9 +88,8 @@
     }
 
     .user-query{
-        position: absolute;
-        left: 25em;
-        top: 22em;
+        margin: 0 auto;
+        width: 50%;
         color: white;
         font-size: 1.5em;
     }
@@ -105,8 +104,7 @@
         width: 100%;
         color: black;
         margin: 2% auto;
-        padding: 1%;
-        border-radius: 50px;
+        border-radius: 20px;
         text-align: center;
         font-size: 1.5em;
         font-weight: 700;
@@ -115,13 +113,18 @@
         background-size: 200% 100%;
         background-position: right bottom;
         transition: all .3s ease-out;
-        }
+    }
 
     .btn:hover {
         background-position: left bottom;
         color: white;
     }
 
+    #page-title{
+            color: #03DAC6; 
+            font-size: 1.5em;
+            font-weight: 800;
+    }
     </style>
 
 </head>
@@ -163,7 +166,7 @@
     <form action="rand.php" method="POST">
         <div class="user-query">
             <p>SELECT <span><input type="text" name="column1" placeholder="productID" /></span> FROM products
-            ORDER BY RAND();</p>
+            ORDER BY <span id="page-title">RAND();</span></p>
             <button class="btn" value="submit">SUBMIT</button>
         </div>
     </form>

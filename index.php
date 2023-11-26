@@ -129,9 +129,7 @@
         $column3 = $_POST['column3'];
 
         if ($column1 === 'all') {
-            $sql = "SELECT * 
-                    FROM customer 
-                    WHERE $column2 IN ('$column3') AND $column2 IS NOT NULL;";
+            $sql = "SELECT * FROM CUSTOMERS WHERE $column2 IN ('$column3') AND $column2 IS NOT NULL;";
             $result = mysqli_query($conn, $sql);
 
             if ($row = @mysqli_fetch_assoc($result)) {
@@ -160,9 +158,7 @@
             }
         } else {
             
-            $sql = "SELECT $column1 
-                    FROM customers
-                    WHERE $column2 IN ('$column3') AND $column2 IS NOT NULL;";
+            $sql = "SELECT $column1 FROM CUSTOMERS WHERE $column2 IN ('$column3') AND $column2 IS NOT NULL;";
 
             $result = mysqli_query($conn, $sql);
             
@@ -178,7 +174,6 @@
             }
             echo "</table>";
         }
-    ?>
     ?>
 
 </body>

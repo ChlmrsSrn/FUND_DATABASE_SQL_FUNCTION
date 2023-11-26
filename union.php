@@ -89,8 +89,8 @@
 
     .user-query{
         position: absolute;
-        left: 45em;
-        top: 5em;
+        left: 50%;
+        top: 15%;
         color: white;
         font-size: 1.5em;
     }
@@ -105,8 +105,7 @@
         width: 100%;
         color: black;
         margin: 2% auto;
-        padding: 1%;
-        border-radius: 50px;
+        border-radius: 20px;
         text-align: center;
         font-size: 1.5em;
         font-weight: 700;
@@ -130,7 +129,7 @@
 
         .result{
             position: absolute;
-            left: 60em;
+            left: 52%;
             top: 20em;
         }
 
