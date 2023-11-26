@@ -86,6 +86,35 @@
         text-align: center;
         border: 1px solid #03DAC6;
     }
+    .user-query{
+        position: absolute;
+        width: 20em;
+        top: 20em;
+        left: 30em;
+        color: white;
+        font-size: 1.5em;
+    }
+    .btn {
+        text-decoration: none;
+        width: 100%;
+        color: black;
+        margin: 2% auto;
+        padding: 1%;
+        border-radius: 50px;
+        text-align: center;
+        font-size: 1.5em;
+        font-weight: 700;
+        cursor: pointer;
+        background: linear-gradient(to right, #03DAC6 50%, white 50%);
+        background-size: 200% 100%;
+        background-position: right bottom;
+        transition: all .3s ease-out;
+        }
+
+        .btn:hover {
+            background-position: left bottom;
+            color: white;
+        }
 
     </style>
 </head>
@@ -99,8 +128,24 @@
         </ul>
     </div>
 
+    <form action="index.php" method="POST">
+        <div class="user-query">
+            <p>
+                SELECT 
+                <span><input type="text" name="column1" placeholder="column name" required></span>
+                FROM customer
+                <br>
+                WHERE 
+                <span><input type="text" name="column2" placeholder="column name" required></span> 
+                IN 
+                <span><input type="text" name="column3" placeholder="country/city" required></span>
+                <button class="btn" type="submit">FILTER</button>
+            </p>
+        </div>
+    </form>
+
     <?php
-        $query = 'SELECT * FROM CUSTOMERS;';
+        $query = 'SELECT * FROM CUSTOMER;';
 
         $result = mysqli_query($conn, $query);
 
@@ -116,22 +161,28 @@
         while ($row = mysqli_fetch_assoc($result)) {
             echo "<tr>";
             echo "<td>" . $row['customerID'] . "</td>";
-            echo "<td>" . $row['name'] . "</td>";
-            echo "<td>" . $row['city'] . "</td>";
-            echo "<td>" . $row['country'] . "</td>";
-            echo "<td>" . $row['email'] . "</td>";
+            echo "<td>" . $row['Name'] . "</td>";
+            echo "<td>" . $row['City'] . "</td>";
+            echo "<td>" . $row['Country'] . "</td>";
+            echo "<td>" . $row['Email'] . "</td>";
             echo "</tr>";
         }
         echo "<table>"; 
+    ?>
 
+    <?php
         $column1 = $_POST['column1'];
         $column2 = $_POST['column2'];
         $column3 = $_POST['column3'];
 
+       
         if ($column1 === 'all') {
-            $sql = "SELECT * FROM CUSTOMERS WHERE $column2 IN ('$column3') AND $column2 IS NOT NULL;";
+            $sql = "SELECT * 
+                    FROM customer 
+                    WHERE $column2 IN ('$column3') AND $column2 IS NOT NULL;";
             $result = mysqli_query($conn, $sql);
 
+            
             if ($row = @mysqli_fetch_assoc($result)) {
                 echo '<table class="result">';
                 echo "<tr>";
@@ -143,6 +194,7 @@
                 echo "</tr>";
 
                 mysqli_data_seek($result, 0);
+
                 
                 while ($row = @mysqli_fetch_assoc($result)) {
                     echo "<tr>";
@@ -152,29 +204,34 @@
                     }
                     echo "</tr>";
                 }
+
                 echo "</table>";
             } else {
                 echo "No results found.";
             }
         } else {
             
-            $sql = "SELECT $column1 FROM CUSTOMERS WHERE $column2 IN ('$column3') AND $column2 IS NOT NULL;";
-
+            $sql = "SELECT $column1 
+                    FROM customer 
+                    WHERE $column2 IN ('$column3') AND $column2 IS NOT NULL;";
             $result = mysqli_query($conn, $sql);
-            
+
             echo '<table class="result">';
             echo "<tr>";
+
             echo "<th>$column1</th>";
+
             echo "</tr>";
+
             while ($row = @mysqli_fetch_assoc($result)) {
                 echo "<tr>";
                 
                 echo "<td>" . $row[$column1] . "</td>";
                 echo "</tr>";
             }
+
             echo "</table>";
         }
     ?>
-
 </body>
 </html>
