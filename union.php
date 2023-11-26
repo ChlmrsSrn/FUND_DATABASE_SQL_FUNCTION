@@ -127,11 +127,11 @@
         font-weight: 800;
     }
 
-    .result{
+        .result{
         position: absolute;
-        left: 52%;
-        top: 20em;
-    }
+            left: 52%;
+            top: 20em;
+        }
 
     </style>
 

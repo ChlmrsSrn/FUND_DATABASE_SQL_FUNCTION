@@ -170,64 +170,40 @@
         echo "<table>"; 
     ?>
 
-    <?php
-        $column1 = $_POST['column1'];
-        $column2 = $_POST['column2'];
-        $column3 = $_POST['column3'];
+<?php
+    error_reporting(0);
 
-       
-        if ($column1 === 'all') {
-            $sql = "SELECT * FROM PRODUCTS WHERE $column2 IN ('$column3') AND $column2 IS NOT NULL;";
-            $result = mysqli_query($conn, $sql);
+    $column1 = $_POST['column1'];
+    $column2 = $_POST['column2'];
+    $column3 = $_POST['column3'];
 
-            
-            if ($row = @mysqli_fetch_assoc($result)) {
-                echo '<table class="result">';
-                echo "<tr>";
+    $query = "SELECT $column1 FROM CUSTOMERS WHERE $column2 IN ('$column3');";
+    $result = mysqli_query($conn, $query);
 
-                foreach ($row as $attribute => $value) {
-                    echo "<th>$attribute</th>";
-                }
-
-                echo "</tr>";
-
-                mysqli_data_seek($result, 0);
-
-                
-                while ($row = @mysqli_fetch_assoc($result)) {
-                    echo "<tr>";
-                    
-                    foreach ($row as $value) {
-                        echo "<td>" . $value . "</td>";
-                    }
-                    echo "</tr>";
-                }
-
-                echo "</table>";
-            } else {
-                echo "No results found.";
-            }
-        } else {
-            
-            $sql = "SELECT $column1 FROM CUSTOMERS WHERE $column2 IN ('$column3') AND $column2 IS NOT NULL;";
-            $result = mysqli_query($conn, $sql);
-
-            echo '<table class="result">';
-            echo "<tr>";
-
-            echo "<th>$column1</th>";
-
-            echo "</tr>";
-
-            while ($row = @mysqli_fetch_assoc($result)) {
-                echo "<tr>";
-                
-                echo "<td>" . $row[$column1] . "</td>";
-                echo "</tr>";
-            }
-
-            echo "</table>";
+    if ($result) {
+        echo "<table>";
+        echo "<tr>";
+        $fields = mysqli_fetch_fields($result);
+        foreach ($fields as $field) {
+            echo "<th>$field->name</th>";
         }
-    ?>
+
+        echo "</tr>";
+
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo "<tr>";
+            foreach ($row as $value) {
+                echo "<td>" . $value . "</td>";
+            }
+            echo "</tr>";
+        }
+
+        echo "</table>";
+    }
+    error_reporting(E_ALL);
+?>
+
+
+
 </body>
 </html>
