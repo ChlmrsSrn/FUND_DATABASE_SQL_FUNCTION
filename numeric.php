@@ -22,6 +22,7 @@
 
     body{
         background-color: #303030;
+        overflow: hidden ;
     }
 
     .nav-container{

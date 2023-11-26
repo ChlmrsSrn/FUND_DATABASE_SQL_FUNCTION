@@ -145,7 +145,7 @@
     </form>
 
     <?php
-        $query = 'SELECT * FROM CUSTOMER;';
+        $query = 'SELECT * FROM CUSTOMERS;';
 
         $result = mysqli_query($conn, $query);
 
@@ -161,10 +161,10 @@
         while ($row = mysqli_fetch_assoc($result)) {
             echo "<tr>";
             echo "<td>" . $row['customerID'] . "</td>";
-            echo "<td>" . $row['Name'] . "</td>";
-            echo "<td>" . $row['City'] . "</td>";
-            echo "<td>" . $row['Country'] . "</td>";
-            echo "<td>" . $row['Email'] . "</td>";
+            echo "<td>" . $row['name'] . "</td>";
+            echo "<td>" . $row['city'] . "</td>";
+            echo "<td>" . $row['country'] . "</td>";
+            echo "<td>" . $row['email'] . "</td>";
             echo "</tr>";
         }
         echo "<table>"; 
@@ -177,9 +177,7 @@
 
        
         if ($column1 === 'all') {
-            $sql = "SELECT * 
-                    FROM customer 
-                    WHERE $column2 IN ('$column3') AND $column2 IS NOT NULL;";
+            $sql = "SELECT * FROM PRODUCTS WHERE $column2 IN ('$column3') AND $column2 IS NOT NULL;";
             $result = mysqli_query($conn, $sql);
 
             
@@ -211,9 +209,7 @@
             }
         } else {
             
-            $sql = "SELECT $column1 
-                    FROM customer 
-                    WHERE $column2 IN ('$column3') AND $column2 IS NOT NULL;";
+            $sql = "SELECT $column1 FROM CUSTOMERS WHERE $column2 IN ('$column3') AND $column2 IS NOT NULL;";
             $result = mysqli_query($conn, $sql);
 
             echo '<table class="result">';
